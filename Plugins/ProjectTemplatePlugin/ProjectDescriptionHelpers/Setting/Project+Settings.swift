@@ -23,7 +23,7 @@ extension Settings {
             .setCodeSignIdentity()
             .setCodeSignStyle()
             .setVersioningSystem()
-            .setProvisioningProfileSpecifier("match Development io.DDD.DDDAttendance")
+            .setProvisioningProfileSpecifier("match Development io.DDD.Attendance")
             .setDevelopmentTeam(Project.Environment.organizationTeamId)
             .setSkipInstall(true)
             .setDebugInformationFormat(),
@@ -34,21 +34,21 @@ extension Settings {
                 .setCFBundleDisplayName(Project.Environment.appName)
                 .setOtherLdFlags("-ObjC -all_load")
                 .setDebugInformationFormat("non-global")
-                .setProvisioningProfileSpecifier("match Development io.DDD.DDDAttendance")
+                .setProvisioningProfileSpecifier("match Development io.DDD.Attendance")
             ),
             .debug(name: "QA", settings: SettingsDictionary()
                 .setProductName(Project.Environment.appDevName)
                 .setCFBundleDisplayName(Project.Environment.appDevName)
                 .setOtherLdFlags("-ObjC -all_load")
                 .setDebugInformationFormat("non-global")
-                .setProvisioningProfileSpecifier("match Development io.DDD.DDDAttendance")
+                .setProvisioningProfileSpecifier("match Development io.DDD.Attendance")
             ),
             .release(name: .release, settings: SettingsDictionary()
                 .setProductName(Project.Environment.appName)
                 .setCFBundleDisplayName(Project.Environment.appName)
                 .setOtherLdFlags("-ObjC -all_load")
                 .setDebugInformationFormat("non-global")
-                .setProvisioningProfileSpecifier("match Development io.DDD.DDDAttendance")
+                .setProvisioningProfileSpecifier("match Development io.DDD.Attendance")
             )
         ], defaultSettings: .recommended
     )
