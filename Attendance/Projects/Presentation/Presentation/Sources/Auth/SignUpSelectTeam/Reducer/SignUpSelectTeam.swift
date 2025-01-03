@@ -54,7 +54,7 @@ public struct SignUpSelectTeam {
   
   //MARK: - NavigationAction
   public enum NavigationAction: Equatable {
-    
+    case presentMember
     
   }
   
@@ -115,7 +115,8 @@ public struct SignUpSelectTeam {
     action: NavigationAction
   ) -> Effect<Action> {
     switch action {
-   
+    case .presentMember:
+      return .none
     }
   }
   
@@ -147,7 +148,7 @@ public struct SignUpSelectTeam {
           if let signUpMemberData = signUpMemberData {
             await send(.async(.signUpMemberResponse(.success(signUpMemberData))))
             try await clock.sleep(for: .seconds(1))
-           
+            await send(.navigation(.presentMember))
           }
         case .failure(let error):
           await send(.async(.signUpMemberResponse(.failure(CustomError.firestoreError(error.localizedDescription)))))
