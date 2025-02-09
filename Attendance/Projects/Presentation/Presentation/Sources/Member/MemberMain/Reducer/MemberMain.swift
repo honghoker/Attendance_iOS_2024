@@ -14,6 +14,19 @@ import Utill
 import ComposableArchitecture
 import FirebaseAuth
 
+public struct Schedule: Identifiable, Equatable {
+  public let id: UUID
+  let month: Int
+  let day: Int
+  let title: String
+  let description: String
+//  let state
+  
+  public static func ==(lhs: Schedule, rhs: Schedule) -> Bool {
+    return lhs.id == rhs.id
+  }
+}
+
 @Reducer
 public struct MemberMain {
   public init() {}
@@ -24,6 +37,29 @@ public struct MemberMain {
     @Shared(.appStorage("UserEmail")) var userEmail: String = ""
     var member: UserDTOMember? = nil
     var showWarningAlert: Bool = false
+    var schedules: [Schedule] = [
+      .init(
+        id: .init(),
+        month: 6,
+        day: 11,
+        title: "오리엔테이션",
+        description: "커리큘럼에 대한 설명 문구 작성"
+      ),
+      .init(
+        id: .init(),
+        month: 6,
+        day: 22,
+        title: "부스팅 데이 1",
+        description: "커리큘럼에 대한 설명 문구 작성"
+      ),
+      .init(
+        id: .init(),
+        month: 7,
+        day: 06,
+        title: "직군 모임 1",
+        description: "커리큘럼에 대한 설명 문구 작성"
+      ),
+    ]
   }
   
   public enum Action: BindableAction, FeatureAction {

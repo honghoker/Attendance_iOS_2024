@@ -22,12 +22,14 @@ struct MemberMainView: View {
     VStack(alignment: .leading, spacing: .zero) {
       navigationBar
       
-      ScrollView {
-        VStack(alignment: .leading, spacing: .zero) {
+//      ScrollView {
+        VStack(alignment: .leading, spacing: 56) {
           attendanceStatus
+          
+          scheduleList
         }
         .padding(.horizontal, 24)
-      }
+//      }
     }
     .customAlert(
       isPresented: store.showWarningAlert,
@@ -118,5 +120,81 @@ struct MemberMainView: View {
       }
     }
     .padding(.top, 20)
+  }
+  
+  private var scheduleList: some View {
+    VStack(alignment: .leading, spacing: 16) {
+      Text("12기 일정표")
+        .pretendardFont(family: .Medium, size: 24)
+        .foregroundStyle(.textPrimary)
+      
+      List {
+        ForEach(store.schedules) {
+          ScheduleCell(
+            month: $0.month,
+            day: $0.day,
+            title: $0.title,
+            description: $0.description
+          )
+        }
+      }
+      .listStyle(.plain)
+      .listRowSpacing(12)
+    }
+  }
+}
+
+struct ScheduleCell: View {
+  private let month: Int
+  private let day: Int
+  private let title: String
+  private let description: String
+  
+  init(
+    month: Int,
+    day: Int,
+    title: String,
+    description: String
+  ) {
+    self.month = month
+    self.day = day
+    self.title = title
+    self.description = description
+  }
+  
+  var body: some View {
+    HStack(alignment: .center, spacing: .zero) {
+      VStack(alignment: .center, spacing: 4) {
+        Text("\(month)월")
+          .pretendardFont(family: .Regular, size: 14)
+          .foregroundStyle(.staticBlack)
+        
+        Text("\(day)")
+          .pretendardFont(family: .Medium, size: 14)
+          .foregroundStyle(.staticBlack)
+      }
+      .padding(.vertical, 8)
+      .padding(.horizontal, 16)
+      .background(.blue20)
+      .clipShape(.rect(cornerRadius: 12))
+      
+      VStack(alignment: .leading, spacing: .zero) {
+        Text(title)
+          .pretendardFont(family: .Bold, size: 18)
+          .foregroundStyle(.backgroundInverse)
+        
+        Text(description)
+          .pretendardFont(family: .Regular, size: 14)
+          .foregroundStyle(.textSecondary)
+      }
+      .padding(.leading, 12)
+      
+      Spacer()
+    }
+    .padding(16)
+    .background(.gray90)
+    .clipShape(.rect(cornerRadius: 16))
+    .listRowSeparator(.hidden)
+    .listRowInsets(.init(.zero))
   }
 }
