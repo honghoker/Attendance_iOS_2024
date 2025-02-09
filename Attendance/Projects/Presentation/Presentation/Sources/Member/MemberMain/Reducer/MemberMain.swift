@@ -36,7 +36,8 @@ public struct MemberMain {
   
   @CasePathable
   public enum View {
-    
+    case didTapAbesentButton
+    case didTapDismissAlertButton
   }
   
   public enum AsyncAction: Equatable {
@@ -82,7 +83,17 @@ public struct MemberMain {
     state: inout State,
     action: View
   ) -> Effect<Action> {
-    
+    switch action {
+    case .didTapAbesentButton:
+      // TODO: - 조건이 만족할 때만 주의 모달 표시
+      /// 명확한 조건 필요
+      state.showWarningAlert = true
+      return .none
+      
+    case .didTapDismissAlertButton:
+      state.showWarningAlert = false
+      return .none
+    }
   }
   
   private func handleInnerAction(
