@@ -22,14 +22,14 @@ struct MemberMainView: View {
     VStack(alignment: .leading, spacing: .zero) {
       navigationBar
       
-//      ScrollView {
+      ScrollView {
         VStack(alignment: .leading, spacing: 56) {
           attendanceStatus
           
           scheduleList
         }
         .padding(.horizontal, 24)
-//      }
+      }
     }
     .customAlert(
       isPresented: store.showWarningAlert,
@@ -128,7 +128,7 @@ struct MemberMainView: View {
         .pretendardFont(family: .Medium, size: 24)
         .foregroundStyle(.textPrimary)
       
-      List {
+      LazyVStack(alignment: .leading, spacing: 12) {
         ForEach(store.schedules) {
           ScheduleCell(
             month: $0.month,
@@ -138,28 +138,35 @@ struct MemberMainView: View {
           )
         }
       }
-      .listStyle(.plain)
-      .listRowSpacing(12)
     }
   }
 }
 
-struct ScheduleCell: View {
+private struct ScheduleCell: View {
   private let month: Int
   private let day: Int
   private let title: String
   private let description: String
+  private let stampImage: Image?
+  private let backgroundColor: Color
+  private let isDashBorderLine: Bool
   
   init(
     month: Int,
     day: Int,
     title: String,
-    description: String
+    description: String,
+    stampImage: Image?,
+    backgroundColor: Color,
+    isDashBorderLine: Bool
   ) {
     self.month = month
     self.day = day
     self.title = title
     self.description = description
+    self.stampImage = stampImage
+    self.backgroundColor = backgroundColor
+    self.isDashBorderLine = isDashBorderLine
   }
   
   var body: some View {
