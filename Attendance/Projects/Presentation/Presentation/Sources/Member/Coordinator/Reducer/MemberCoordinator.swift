@@ -21,7 +21,7 @@ public struct MemberCoordinator {
   public struct State: Equatable {
     @Shared(.appStorage("UserUID")) var userUid: String = ""
     var routes: [Route<MemberScreen.State>]
-    
+
     public init() {
       routes = [.root(.member(.init()), embedInNavigationView: true)]
     }

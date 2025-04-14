@@ -24,29 +24,40 @@ public struct MemberMain {
     @Shared(.appStorage("UserEmail")) var userEmail: String = ""
     var member: UserDTOMember? = nil
     var showWarningAlert: Bool = false
-    var schedules: [Schedule] = [
+    var schedules: IdentifiedArrayOf<Schedule> = .init(uniqueElements: [
       .init(
         id: UUID().uuidString,
         month: 6,
         day: 11,
         title: "오리엔테이션",
-        description: "커리큘럼에 대한 설명 문구 작성"
+        description: "커리큘럼에 대한 설명 문구 작성",
+        status: .present
       ),
       .init(
         id: UUID().uuidString,
         month: 6,
         day: 22,
         title: "부스팅 데이 1",
-        description: "커리큘럼에 대한 설명 문구 작성"
+        description: "커리큘럼에 대한 설명 문구 작성",
+        status: .late
       ),
       .init(
         id: UUID().uuidString,
         month: 7,
         day: 06,
         title: "직군 모임 1",
-        description: "커리큘럼에 대한 설명 문구 작성"
+        description: "커리큘럼에 대한 설명 문구 작성",
+        status: .absent
       ),
-    ]
+      .init(
+        id: UUID().uuidString,
+        month: 7,
+        day: 20,
+        title: "오리엔테이션",
+        description: "커리큘럼에 대한 설명 문구 작성",
+        status: .tbd
+      )
+    ])
   }
   
   public enum Action: BindableAction, FeatureAction {

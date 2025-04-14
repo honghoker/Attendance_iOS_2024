@@ -1,8 +1,8 @@
 //
 //  Schedule.swift
-//  Model
+//  DDDAttendance
 //
-//  Created by 홍은표 on 3/16/25.
+//  Created by eunpyo on 4/13/25.
 //
 
 import Foundation
@@ -13,29 +13,24 @@ public struct Schedule: Identifiable, Equatable {
   public let day: Int
   public let title: String
   public let description: String
-  public let state: AttendanceType
-  
+  public let status: AttendanceStatus
+
   public init(
     id: String,
     month: Int,
     day: Int,
     title: String,
     description: String,
-    state: AttendanceType
+    status: AttendanceStatus
   ) {
     self.id = id
     self.month = month
     self.day = day
     self.title = title
     self.description = description
-    self.state = switch state {
-    case .present, .late, .absent:
-      state
-    default:
-      .notAttendance
-    }
+    self.status = status
   }
-  
+
   public static func ==(lhs: Schedule, rhs: Schedule) -> Bool {
     return lhs.id == rhs.id
   }
